@@ -8,3 +8,6 @@ Web page that will get stock data from YH Finance API via Rapid API. Display inf
 
 ### Support
 Contact Theara Chea for support and inquries.
+
+https://rapidapi.com/apidojo/api/yh-finance
+
