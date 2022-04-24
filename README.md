@@ -1,7 +1,7 @@
 # stock_data_api
 Get stock data for user input
 
-Web page that will get stock data from YH Finance API via Rapid API. 
+Web page that will get stock data from YH Finance API via Rapid API. Display infomation like current price, 
 
 ### Utilize
 -JavaScript, HTML, CSS, REST API
