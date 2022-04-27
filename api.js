@@ -7,7 +7,7 @@ function getInfo() {
     xhr.withCredentials = true;
 
     xhr.onreadystatechange = function() {
-        if (this.readyState == 4) {
+        if (this.readyState == 4 && this.status == 200) {
             recordStr = this.responseText; // JSON format
             record = JSON.parse(recordStr); // Create JS object
 
