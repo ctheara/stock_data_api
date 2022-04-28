@@ -65,7 +65,7 @@ function getInfo() {
         }
     }
 
-    var api_key = "913846a913msh9f1d8abf8e98d47p1e0c1djsn54327b4fa572";
+    var api_key = "";
 
     
     xhr.open("GET", "https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=AMRN&range=5y&region=US");
