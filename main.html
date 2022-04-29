@@ -1,16 +1,33 @@
 <!DOCTYPE HTML>
 <html>
 <head>  
-    <style>
-        h1 {text-align: center;}
-    </style>
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
+
+    <!-- Creates navBar  -->
+    <ul class = "navbar">
+        <li> <a href="./main.html">Home</a> </li>    <!-- link to custom page link "top"  -->
+        <li> <a href="./test_chart.html">Stock Chart</a> </li>
+        <li> <a href="./about.html">About</a> </li>
+      </ul>
+      
+      <br><br>
     
-    <h1>Stock</h1>
+    <h1>Stock Data</h1>
+
+    <p>Look up stock data by entering stock ticker in the search box.</p> 
+
+    <a href="./test_chart.html">Stock Chart</a><br>
+    
+    
+    <label for = 'name'>Enter Stock Ticker: </label>
+    <input id = 'name' type = 'text' required> 
+    <input type = "submit" value = "Submit" onclick="getInfo()">  <!-- call funcation to connect to API -->
+
     <div id="info"></div>
-    <input type = "submit" value = "Submit" onclick="getInfo()"> 
+
 
     <script src="api.js"></script>
 </body>

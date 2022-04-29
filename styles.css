@@ -1,0 +1,30 @@
+
+        h1 {
+            text-align: center;
+        }
+        ul.navbar {
+            position: fixed;  /* postion is set to fixed*/
+            top: 0;           /* postion to top most*/
+            width: 100%;      /* navbar to full width of page */
+            margin: 0;
+            padding: 0;	
+            background-color: rgb(0, 38, 73);    
+            }
+
+            ul.navbar li {
+            list-style-type: none;
+            display:inline-block;	
+            }
+
+            ul.navbar li a {			
+            display:block;
+            padding: 14px 16px;
+            color:white;
+            text-align:center;
+            text-decoration: none;
+            }  
+
+                /*  this is to highlight navBar, bulletpoint  */
+            ul.navbar li a:hover {
+            background-color: rgb(124,33,40); 
+            }  
