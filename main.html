@@ -23,12 +23,88 @@
     
     
     <label for = 'name'>Enter Stock Ticker: </label>
-    <input id = 'name' type = 'text' required> 
+    <input id = 'stockT' type = 'text' required> 
     <input type = "submit" value = "Submit" onclick="getInfo()">  <!-- call funcation to connect to API -->
 
     <div id="info"></div>
 
 
-    <script src="api.js"></script>
+    <h2>Tables Side by Side</h2>
+<p>How to create side-by-side tables with CSS:</p>
+
+
+<!-- Table -->
+<div class="row">
+  <div class="column">
+    <table>
+        <tr>
+            <th>Name:</th>
+            <td>Bill Gates</td>
+          </tr>
+          <tr>
+            <th>Current Price:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Market Cap:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Share Outstanding:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Beta:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>PE Ratio:</th>
+            <td> </td>
+          </tr>
+
+    </table>
+  </div>
+
+
+
+  <div class="column">
+    <table>
+        <tr>
+            <th>Profit Margin:</th>
+            <td>Bill Gates</td>
+          </tr>
+          <tr>
+            <th>Gross Profit:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Debt-Equity:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Total Cash:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Total Revenue:</th>
+            <td> </td>
+          </tr>
+          <tr>
+            <th>Return on Equity:</th>
+            <td> </td>
+          </tr>
+          
+    </table>
+  </div>
+</div>
+
+
+
+
+    <script src="test_JSON.js"></script>
+    <!--
+    
+    <script src="stat_api.js"></script>
+    -->
 </body>
 </html> 
