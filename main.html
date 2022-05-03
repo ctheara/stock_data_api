@@ -1,110 +1,141 @@
 <!DOCTYPE HTML>
 <html>
-<head>  
-    <link rel="stylesheet" href="styles.css">
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+
 
 </head>
-<body>
 
-    <!-- Creates navBar  -->
-    <ul class = "navbar">
-        <li> <a href="./main.html">Home</a> </li>    <!-- link to custom page link "top"  -->
-        <li> <a href="./test_chart.html">Stock Chart</a> </li>
-        <li> <a href="./about.html">About</a> </li>
+<body style="background-color:rgb(225, 225, 225);">
+
+  <!-- Create NavBar  -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a style="color:white;" class="navbar-brand" href="./main.html">StockData.io</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li> <a style="color:white;" href="./main.html">Home</a> </li> <!-- link to custom page link "top"  -->
+        <li> <a style="color:white;" href="./chart_page.html">Stock Chart</a> </li>
       </ul>
-      
-      <br><br>
-    
+      <ul class="nav navbar-nav navbar-right">
+        <li> <a style="color:white;" href="./about.html">About</a> </li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
     <h1>Stock Data</h1>
+    <p>Look up stock data by entering stock ticker in the search box below.</p>
 
-    <p>Look up stock data by entering stock ticker in the search box.</p> 
+    <label for='name'>Enter Stock Ticker: </label>
+    <input id='stockTickerUser' type='text' required>
+    <input type="submit" value="Submit" class="btn btn-primary" onclick="getInfo()">      
 
-    <a href="./test_chart.html">Stock Chart</a><br>
-    
-    
-    <label for = 'name'>Enter Stock Ticker: </label>
-    <input id = 'stockT' type = 'text' required> 
-    <input type = "submit" value = "Submit" onclick="getInfo()">  <!-- call funcation to connect to API -->
+    <!-- call funcation to connect to API -->
+  </div>
+  <div id="info"></div> <br><br>
 
-    <div id="info"></div>
+  <div>
 
-
-    <h2>Tables Side by Side</h2>
-<p>How to create side-by-side tables with CSS:</p>
+  </div>
 
 
-<!-- Table -->
-<div class="row">
-  <div class="column">
-    <table>
-        <tr>
+  <!-- Stock Data Table -->
+  <div class="container boarder"  >
+
+
+
+    <div id="stockTable" class="row " >
+      <h3 >Statistics</h3>
+      <div class="column" >
+        <table>
+          <tr>
             <th>Name:</th>
-            <td>Bill Gates</td>
+            <td id='compName'></td>
           </tr>
           <tr>
             <th>Current Price:</th>
-            <td> </td>
+            <td id='stockPrice'> </td>
           </tr>
           <tr>
             <th>Market Cap:</th>
-            <td> </td>
+            <td id='marCap'> </td>
           </tr>
           <tr>
             <th>Share Outstanding:</th>
-            <td> </td>
+            <td id='numShares'> </td>
           </tr>
           <tr>
             <th>Beta:</th>
-            <td> </td>
+            <td id='beta'> </td>
           </tr>
           <tr>
-            <th>PE Ratio:</th>
-            <td> </td>
+            <th>Forward PE:</th>
+            <td id='pe'> </td>
           </tr>
 
-    </table>
-  </div>
+        </table>
+      </div>
 
 
 
-  <div class="column">
-    <table>
-        <tr>
+      <div class="column" >
+        <table>
+          <tr>
             <th>Profit Margin:</th>
-            <td>Bill Gates</td>
+            <td id='pMargin'></td>
           </tr>
           <tr>
             <th>Gross Profit:</th>
-            <td> </td>
-          </tr>
-          <tr>
-            <th>Debt-Equity:</th>
-            <td> </td>
+            <td id='grossP'> </td>
           </tr>
           <tr>
             <th>Total Cash:</th>
-            <td> </td>
+            <td id='cash'> </td>
           </tr>
           <tr>
             <th>Total Revenue:</th>
-            <td> </td>
+            <td id='revenue'> </td>
+          </tr>
+          <tr>
+            <th>Debt-Equity:</th>
+            <td id='debtE'> </td>
           </tr>
           <tr>
             <th>Return on Equity:</th>
-            <td> </td>
+            <td id='roe'> </td>
           </tr>
-          
-    </table>
+
+        </table>
+      </div>
+    </div>
   </div>
-</div>
+  <script src="stat_api.js"></script>
 
 
 
+  <!--
+    <script src="test_chart.js"></script>
+        <script src="test_JSON.js"></script>
 
-    <script src="test_JSON.js"></script>
-    <!--
-    
-    <script src="stat_api.js"></script>
+    <script src="chart_api.js"></script>
+
+
     -->
 </body>
-</html> 
+
+</html>

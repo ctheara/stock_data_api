@@ -4,12 +4,22 @@ function getInfo() {
 
         record = JSON.parse(recordStr);
 
-        //test to get first timestamp
-        msg = "<br><b><u>Result:</b></u> <br>Ticker: " + record.symbol + "<br>";
+        //unhide stock stat table
+        document.getElementById('stockTable').style.display = 'block';
 
-        document.getElementById("info").innerHTML = msg;
-     
-
+        //get stock data from api and write in table
+        document.getElementById("beta").innerHTML = record.defaultKeyStatistics.beta.fmt;
+        document.getElementById("numShares").innerHTML = record.defaultKeyStatistics.sharesOutstanding.fmt;
+        document.getElementById("compName").innerHTML = record.price.longName;
+        document.getElementById("marCap").innerHTML = record.summaryDetail.marketCap.fmt;
+        document.getElementById("stockPrice").innerHTML = record.financialData.currentPrice.raw;
+        document.getElementById("pe").innerHTML = record.summaryDetail.forwardPE.fmt;
+        document.getElementById("pMargin").innerHTML = record.financialData.profitMargins.fmt;
+        document.getElementById("grossP").innerHTML = record.financialData.grossProfits.fmt;
+        document.getElementById("debtE").innerHTML = record.financialData.debtToEquity.fmt;
+        document.getElementById("cash").innerHTML = record.financialData.totalCash.fmt;
+        document.getElementById("revenue").innerHTML = record.financialData.totalRevenue.fmt;
+        document.getElementById("roe").innerHTML = record.financialData.returnOnEquity.fmt;
 }
 
 

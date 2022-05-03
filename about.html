@@ -1,41 +1,56 @@
 <!DOCTYPE HTML>
 <html>
-<head>  
+
+<head>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 
 </head>
-<body>
 
-    <!-- Creates navBar  -->
-    <ul class = "navbar">
-        <li> <a href="./main.html">Home</a> </li>    <!-- link to custom page link "top"  -->
-        <li> <a href="./test_chart.html">Stock Chart</a> </li>
-        <li> <a href="./about.html">About</a> </li>
-      </ul>
-      
-      <br><br>
-    
-    <h1>About</h1>
+<body style="background-color:rgb(220, 220, 220);">
+
+    <!-- Create NavBar  -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a style="color:white;" class="navbar-brand" href="./main.html">StockData.io</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li> <a style="color:white;" href="./main.html">Home</a> </li> <!-- link to custom page link "top"  -->
+                <li> <a style="color:white;" href="./chart_page.html">Stock Chart</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li> <a style="color:white;" href="./about.html">About</a> </li>
+            </ul>
+        </div>
+    </nav>
 
 
-    <p>This project connect to <a href="https://rapidapi.com/apidojo/api/yh-financ">YH Finance API via rapidAPI</a>  to get stock data for user input</p>   
-    <br>
+    <div class="container-fluid">
 
-    <p><b>Utilize</b></p>
-        <p>-JavaScript, HTML, CSS, REST API</p>
-        
-    <p><b>Support</b></p>
+        <br>
+        <p>This project connects to <a href="https://rapidapi.com/apidojo/api/yh-finance">YH Finance API via rapidAPI</a>
+            to get stock data.</p><br>
+
+        <h4><b>Utilize</b></h4>
+        <p>-JavaScript, HTML, CSS, REST API</p><br>
+
+        <h4><b>Support</b></h4>
         <p>Contact Theara Chea for support and inquries.</p>
-        <p>GitHub: https://github.com/ctheara/stock_data_api</p>
-        
-        
-        
-        
-    
+        <p>GitHub: <a href="https://github.com/ctheara/stock_data_api">https://github.com/ctheara/stock_data_api</a></p>
+
+    </div>
+
+
+
+
+
 
 
 
 
     <script src="api.js"></script>
 </body>
-</html> 
+
+</html>
