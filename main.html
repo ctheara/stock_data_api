@@ -4,9 +4,6 @@
 <head>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
-
-
 </head>
 
 <body style="background-color:rgb(225, 225, 225);">
@@ -27,41 +24,25 @@
     </div>
   </nav>
 
-
-
-
-
-
-
-
-
-
-
+  <!-- Container for title, input box, and button -->
   <div class="container">
     <h1>Stock Data</h1>
     <p>Look up stock data by entering stock ticker in the search box below.</p>
 
     <label for='name'>Enter Stock Ticker: </label>
     <input id='stockTickerUser' type='text' required>
-    <input type="submit" value="Submit" class="btn btn-primary" onclick="getInfo()">      
-
-    <!-- call funcation to connect to API -->
+    <input type="submit" value="Submit" class="btn btn-primary" onclick="getInfo()"> <!-- call funcation to connect to API -->
   </div>
+
+  <!-- Container for title, input box, and button -->
   <div id="info"></div> <br><br>
-
-  <div>
-
-  </div>
 
 
   <!-- Stock Data Table -->
-  <div class="container boarder"  >
-
-
-
-    <div id="stockTable" class="row " >
-      <h3 >Statistics</h3>
-      <div class="column" >
+  <div class="container boarder">
+    <div id="stockTable" class="row ">
+      <h3>Statistics</h3>
+      <div class="column">
         <table>
           <tr>
             <th>Name:</th>
@@ -91,9 +72,7 @@
         </table>
       </div>
 
-
-
-      <div class="column" >
+      <div class="column">
         <table>
           <tr>
             <th>Profit Margin:</th>
@@ -124,18 +103,9 @@
       </div>
     </div>
   </div>
+
   <script src="stat_api.js"></script>
-
-
-
-  <!--
-    <script src="test_chart.js"></script>
-        <script src="test_JSON.js"></script>
-
-    <script src="chart_api.js"></script>
-
-
-    -->
+  
 </body>
 
 </html>

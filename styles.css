@@ -1,3 +1,4 @@
+/*hide chart stat table*/
 #stockTable {
   display: none;
 }
@@ -8,6 +9,7 @@ h1 {
   text-align: center;
 }
 
+/*navbar styling*/
 ul.navbar {
   position: fixed;
   /* postion is set to fixed*/

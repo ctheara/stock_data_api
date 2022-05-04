@@ -2,16 +2,11 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- link to styling file  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-
-
 </head>
 
 <body style="background-color:rgb(230, 230, 230);">
-
-
     <!-- Create NavBar  -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -19,7 +14,7 @@
                 <a style="color:white;" class="navbar-brand" href="./main.html">StockData.io</a>
             </div>
             <ul class="nav navbar-nav">
-                <li> <a style="color:white;" href="./main.html">Home</a> </li> <!-- link to custom page link "top"  -->
+                <li> <a style="color:white;" href="./main.html">Home</a> </li>
                 <li> <a style="color:white;" href="./chart_page.html">Stock Chart</a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -28,56 +23,47 @@
         </div>
     </nav>
 
-
+    <!-- Container for title, input box, and button -->
     <div class="container-fluid">
         <br>
         <label for='name'>Enter Stock Ticker: </label>
         <input id='chartTickerUser' type='text' required>
-        <input type="submit" value="Submit" class="btn btn-primary" onclick=" getChartInfo()">
-        <!-- call funcation to connect to API -->
+        <input type="submit" value="Submit" class="btn btn-primary" onclick=" getChartInfo()"> <!-- call function to connect to API -->
         <span id="info"> </span><button type="button" class="btn btn-primary" style="display: inline">Create
             Chart</button>
         <br>
     </div>
 
+    <!-- Container stock price chart -->
     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-
     <script>
-
-
-
         //read stock ticker saved in memory
         var stockTickerStored = localStorage.getItem("stockTicker");
 
         //get user stock ticker input
         stockTickerUser = document.getElementById('chartTickerUser').value.trim().toLowerCase();
 
-
-
         //if no entry in text box and their is a stock ticker stored in local storage, then look that stock
-
         if (stockTickerUser == "") {
             if (stockTickerStored) {
                 getChartInfoStored();
             }
         }
 
-
         // ENTER YOUR API KEY
         let api_key = "";
 
 
-
-
-
-
+        //connect to API and create stock price chart
         function getChartInfo() {
+            //saved user search in local memory
             stockTickerUser = document.getElementById('chartTickerUser').value.trim().toLowerCase();
             localStorage.setItem('stockTicker', stockTickerUser); //Save info to local storage
 
+            //connecting to API
             const data = null;
             const xhr = new XMLHttpRequest();
             xhr.withCredentials = false;
@@ -86,89 +72,53 @@
                 //if API connection is successful
                 if (this.readyState == 4 && this.status == 200) {
                     recordStr = this.responseText;
+                    record = JSON.parse(recordStr); // Create JS object
 
-                    record = JSON.parse(recordStr);
-
-                    //test to get first timestamp
+                    //display when api is connected successful
                     msg = "<u>Data Ready for</u>:<b>" + record.chart.result[0].meta.symbol + "</b>";
 
+                    //array for date and prices to be used for charting
+                    let dataPointList = [];
 
-
-                    //first timestamp
-                    let timeTest = record.chart.result[0].timestamp[0];
-                    var myDate = new Date(timeTest * 1000);
-                    let dateArray = myDate.toLocaleString().split("/") + "<br>";
-
-                    let year = myDate.getFullYear();
-                    let month = myDate.getMonth();
-                    let day = myDate.getDate();
-
-
-
-                    let dataPointList = []
-
+                    //stock prices
                     let priceHigh = 0;
                     let priceLow = 0;
                     let priceOpen = 0;
                     let priceClose = 0;
-                    //                                { x: new Date(2012, 01, 1), y: 26 },
-                    //test to get all price
+
+                    //read data and store date and price data in dataPointList
                     for (var i = 0; i < record.chart.result[0].indicators.quote[0].open.length; i++) {
-                        //msg += record.chart.result[0].indicators.quote[0].open[i];
-
-
-                        //get timedate
+                        //read timestamp and convert to date
                         let timeTest = record.chart.result[0].timestamp[i];
                         var myDate = new Date(timeTest * 1000);
-                        let dateArray = myDate.toLocaleString().split("/") + "<br>";
-                        let year = myDate.getFullYear();
-                        let month = myDate.getMonth();
-                        let day = myDate.getDate();
-
-
-
+               
+                        //read stock price data and store in variables, format price to two decimal places
+                        //condition if price data has a decimal place or not
                         if (record.chart.result[0].indicators.quote[0].open[i].toString().indexOf(".") > -1) {
                             priceHigh = record.chart.result[0].indicators.quote[0].high[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
                             priceLow = record.chart.result[0].indicators.quote[0].low[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
                             priceOpen = record.chart.result[0].indicators.quote[0].open[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
                             priceClose = record.chart.result[0].indicators.quote[0].close[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
-
-
                         }
-                        else {
+                        else { 
                             priceHigh = record.chart.result[0].indicators.quote[0].high[i].toString();
                             priceLow = record.chart.result[0].indicators.quote[0].low[i].toString();
                             priceOpen = record.chart.result[0].indicators.quote[0].open[i].toString();
                             priceClose = record.chart.result[0].indicators.quote[0].close[i].toString();
                         }
-
-
-
-                        dataPointList.push({ x: new Date(year, month, day), y: [parseFloat(priceOpen), parseFloat(priceHigh), parseFloat(priceLow), parseFloat(priceClose)] });
-                        //msg += price
+                        
+                        //add date and price data to dataPointList
+                        dataPointList.push({ x: myDate, y: [parseFloat(priceOpen), parseFloat(priceHigh), parseFloat(priceLow), parseFloat(priceClose)] });
+                        
                         if (i + 1 != record.chart.result[0].indicators.quote[0].open.length) {
                             msg += "";
                         }
                     }
-
-
-                    //alert(dataPointList[0].x);
-                    //alert(dataPointList[0].y);
-
-
-
-
-
-
-
-
-
+                    
                     document.getElementById("info").innerHTML = msg;
 
-                    //charting
-
+                    //charting via canvasJS
                     window.onclick = function () {
-
                         var chart = new CanvasJS.Chart("chartContainer", {
                             animationEnabled: true,
                             theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -201,9 +151,8 @@
                                 name: "Stock Price",
                                 yValueFormatString: "$#,##0.00",
                                 xValueFormatString: "MMM DD YYYY",
-                                dataPoints: dataPointList
+                                dataPoints: dataPointList //use dataPointList array as data points
                             },
-
                             ]
                         });
                         chart.render();
@@ -220,10 +169,6 @@
                     }
                 }
             }
-
-
-
-
 
             xhr.open("GET", "https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=" + stockTickerUser + "&range=5y&region=US");
             xhr.setRequestHeader("X-RapidAPI-Host", "yh-finance.p.rapidapi.com");
@@ -234,21 +179,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //connect to API and create stock price chart for stock ticker saved in local storage
         function getChartInfoStored() {
             const data = null;
             const xhr = new XMLHttpRequest();
@@ -258,89 +189,53 @@
                 //if API connection is successful
                 if (this.readyState == 4 && this.status == 200) {
                     recordStr = this.responseText;
+                    record = JSON.parse(recordStr); // Create JS object
 
-                    record = JSON.parse(recordStr);
-
-                    //test to get first timestamp
+                    //display when api is connected successful
                     msg = "<u>Data Ready for</u>:<b>" + record.chart.result[0].meta.symbol + "</b>";
 
-
-                    //first timestamp
-                    let timeTest = record.chart.result[0].timestamp[0];
-                    var myDate = new Date(timeTest * 1000);
-                    let dateArray = myDate.toLocaleString().split("/") + "<br>";
-
-                    let year = myDate.getFullYear();
-                    let month = myDate.getMonth();
-                    let day = myDate.getDate();
-
-
-
-
+                    //array for date and prices to be used for charting
                     let dataPointList = []
 
+                    //stock prices
                     let priceHigh = 0;
                     let priceLow = 0;
                     let priceOpen = 0;
                     let priceClose = 0;
-                    //                                { x: new Date(2012, 01, 1), y: 26 },
-                    //test to get all price
+
+                    //read data and store date and price data in dataPointList
                     for (var i = 0; i < record.chart.result[0].indicators.quote[0].open.length; i++) {
-                        //msg += record.chart.result[0].indicators.quote[0].open[i];
-
-
-                        //get timedate
+                        //read timestamp and convert to date
                         let timeTest = record.chart.result[0].timestamp[i];
                         var myDate = new Date(timeTest * 1000);
-                        let dateArray = myDate.toLocaleString().split("/") + "<br>";
-                        let year = myDate.getFullYear();
-                        let month = myDate.getMonth();
-                        let day = myDate.getDate();
-
-
-
+               
+                        //read stock price data and store in variables, format price to two decimal places
+                        //condition if price data has a decimal place or not
                         if (record.chart.result[0].indicators.quote[0].open[i].toString().indexOf(".") > -1) {
                             priceHigh = record.chart.result[0].indicators.quote[0].high[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
                             priceLow = record.chart.result[0].indicators.quote[0].low[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
                             priceOpen = record.chart.result[0].indicators.quote[0].open[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
                             priceClose = record.chart.result[0].indicators.quote[0].close[i].toString().substring(0, record.chart.result[0].indicators.quote[0].open[i].toString().indexOf('.') + 3);
-
-
                         }
-                        else {
+                        else { 
                             priceHigh = record.chart.result[0].indicators.quote[0].high[i].toString();
                             priceLow = record.chart.result[0].indicators.quote[0].low[i].toString();
                             priceOpen = record.chart.result[0].indicators.quote[0].open[i].toString();
                             priceClose = record.chart.result[0].indicators.quote[0].close[i].toString();
                         }
-
-
-
-                        dataPointList.push({ x: new Date(year, month, day), y: [parseFloat(priceOpen), parseFloat(priceHigh), parseFloat(priceLow), parseFloat(priceClose)] });
-                        //msg += price
+                        
+                        //add date and price data to dataPointList
+                        dataPointList.push({ x: myDate, y: [parseFloat(priceOpen), parseFloat(priceHigh), parseFloat(priceLow), parseFloat(priceClose)] });
+                        
                         if (i + 1 != record.chart.result[0].indicators.quote[0].open.length) {
                             msg += "";
                         }
                     }
-
-
-                    //alert(dataPointList[0].x);
-                    //alert(dataPointList[0].y);
-
-
-
-
-
-
-
-
-
+                    
                     document.getElementById("info").innerHTML = msg;
 
-                    //charting
-
+                    //charting via canvasJS
                     window.onclick = function () {
-
                         var chart = new CanvasJS.Chart("chartContainer", {
                             animationEnabled: true,
                             theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -373,7 +268,7 @@
                                 name: "Stock Price",
                                 yValueFormatString: "$#,##0.00",
                                 xValueFormatString: "MMM DD YYYY",
-                                dataPoints: dataPointList
+                                dataPoints: dataPointList //use dataPointList array as data points
                             },
 
                             ]
@@ -388,14 +283,12 @@
                             }
                             e.chart.render();
                         }
-
                     }
                 }
             }
 
+            //ENTER API KEY
             let api_key = "";
-
-
 
             xhr.open("GET", "https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=1d&symbol=" + stockTickerStored + "&range=5y&region=US");
             xhr.setRequestHeader("X-RapidAPI-Host", "yh-finance.p.rapidapi.com");
@@ -403,18 +296,7 @@
 
             xhr.send(data);
         }
-
-
-
-
-
-
-
     </script>
 
-    <script>
-
-    </script>
 </body>
-
 </html>
